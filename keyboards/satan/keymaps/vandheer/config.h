@@ -40,6 +40,23 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 #define BACKLIGHT_PIN B6
 
+/* Backlight configuration
+ */
+#define BACKLIGHT_LEVELS 4
+
+/* Underlight configuration
+ */
+
+#define RGB_DI_PIN E2
+#define RGBLIGHT_TIMER
+#define RGBLED_NUM 8     // Number of LEDs
+#define RGBLIGHT_HUE_STEP 10
+#define RGBLIGHT_SAT_STEP 17
+#define RGBLIGHT_VAL_STEP 17
+
+/* Enable Backlight Breathing */
+// #define BACKLIGHT_BREATHING
+
 /* COL2ROW or ROW2COL */
 #define DIODE_DIRECTION COL2ROW
 
@@ -50,24 +67,27 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #define DEBOUNCING_DELAY 5
 
 // Waiting time for next tap dance to registered
-#define TAPPING_TERM 1000
+// #define TAPPING_TERM 1000
 
 /* Mechanical locking support. Use KC_LCAP, KC_LNUM or KC_LSCR instead in keymap */
 #define LOCKING_SUPPORT_ENABLE
 /* Locking resynchronize hack */
 #define LOCKING_RESYNC_ENABLE
 
-/* Enable Backlight Breathing */
-#define BACKLIGHT_BREATHING
-
 /* key combination for command */
 #define IS_COMMAND() ( \
     keyboard_report->mods == (MOD_BIT(KC_LSHIFT) | MOD_BIT(KC_RSHIFT)) \
 )
 
-/* Backlight configuration
+/* Underlight configuration
  */
-#define BACKLIGHT_LEVELS 4
+
+#define RGB_DI_PIN E2
+#define RGBLIGHT_TIMER
+#define RGBLED_NUM 8     // Number of LEDs
+#define RGBLIGHT_HUE_STEP 10
+#define RGBLIGHT_SAT_STEP 17
+#define RGBLIGHT_VAL_STEP 17
 
 /*
  * Force NKRO
@@ -96,16 +116,6 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
  * parentheses when the keys are released.
  */
 #define DISABLE_SPACE_CADET_ROLLOVER
-
-/* Underlight configuration
- */
-
-#define RGB_DI_PIN E2
-#define RGBLIGHT_TIMER
-#define RGBLED_NUM 8     // Number of LEDs
-#define RGBLIGHT_HUE_STEP 10
-#define RGBLIGHT_SAT_STEP 17
-#define RGBLIGHT_VAL_STEP 17
 
 /*
  * Feature disable options
