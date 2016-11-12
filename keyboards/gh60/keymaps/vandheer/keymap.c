@@ -1,12 +1,9 @@
-#include "satan.h"
+#include "gh60.h"
+#include "action_layer.h"
 
 // Used for SHIFT_ESC
 #define MODS_CTRL_MASK  (MOD_BIT(KC_LSHIFT)|MOD_BIT(KC_RSHIFT))
 
-// Each layer gets a name for readability, which is then used in the keymap matrix below.
-// The underscores don't mean anything - you can have a layer called STUFF or any other name.
-// Layer names don't all need to be of the same length, obviously, and you can also skip them
-// entirely and just use numbers.
 #define _BL 0 // Base Layer
 #define _NA 1 // Navigation Layer
 #define _FL 2 // Function Layer
@@ -19,11 +16,6 @@
 #define MAIL M(3)
 #define PMAN M(4)
 #define ITERM M(5)
-
-//Tap Dance Declarations
-enum {
-  TD_SPC_ENT = 0
-};
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   /* Keymap _BL: (Base Layer) Default Layer
@@ -140,12 +132,6 @@ void action_function(keyrecord_t *record, uint8_t id, uint8_t opt) {
       break;
   }
 }
-
-// Tap Dance Definitions
-qk_tap_dance_action_t tap_dance_actions[] = {
-  //Tap once for Esc, twice for Caps Lock
-  [TD_SPC_ENT]  = ACTION_TAP_DANCE_DOUBLE(KC_SPC, KC_ENT)
-};
 
 // Macro
 const macro_t *action_get_macro(keyrecord_t *record, uint8_t id, uint8_t opt) // this is the function signature -- just copy/paste it into your keymap file as it is.
