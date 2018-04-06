@@ -19,6 +19,9 @@
 #define PMAN M(4)
 #define ITERM M(5)
 
+// Alias for KC_NO
+#define __n__ KC_NO
+
 //Tap Dance Declarations
 enum {
   TD_SPC_ENT = 0
@@ -59,11 +62,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
    * `-----------------------------------------------------------'
    */
 [_NA] = KEYMAP_ANSI(
-  KC_GRV,   KC_NO,    KC_NO,  KC_NO,  KC_NO,  KC_NO,  KC_NO,    KC_NO,    KC_NO,    KC_NO,    KC_NO,    KC_NO,  KC_NO,  KC_NO, \
-  KC_NO,    KC_NO,    KC_NO,  KC_NO,  KC_NO,  ITERM,  KC_HOME,  KC_PGUP,  KC_PGDN,  KC_END,   PMAN,     KC_NO,  KC_NO,  KC_NO,  \
-  KC_TRNS,  KC_NO,    SLACK,  KC_NO,  KC_NO,  KC_NO,  KC_LEFT,  KC_DOWN,  KC_UP,    KC_RIGHT, KC_NO,    KC_NO,          KC_TRNS,\
-  KC_TRNS,  KC_NO,    KC_NO,  CHROME, KC_NO,  KC_NO,  KC_NO,    MAIL,     KC_NO,    KC_NO,    KC_NO,                    KC_TRNS,\
-  KC_TRNS,  KC_TRNS,  KC_TRNS,                     KC_TRNS,                         KC_TRNS,  KC_TRNS,KC_TRNS,          KC_TRNS),
+  KC_GRV,   __n__,    __n__,  __n__,  __n__,  __n__,  __n__,    __n__,    __n__,    __n__,    __n__,    __n__,  __n__,  __n__, \
+  __n__,    __n__,    __n__,  __n__,  __n__,  ITERM,  KC_HOME,  KC_PGUP,  KC_PGDN,  KC_END,   PMAN,     __n__,  __n__,  __n__,  \
+  _______,  __n__,    SLACK,  __n__,  __n__,  __n__,  KC_LEFT,  KC_DOWN,  KC_UP,    KC_RIGHT, __n__,    __n__,          _______,\
+  _______,  __n__,    __n__,  CHROME, __n__,  __n__,  __n__,    MAIL,     __n__,    __n__,    __n__,                    _______,\
+  _______,  _______,  _______,                     _______,                         _______,  _______,_______,          _______),
 
 /* Keymap _FN: Function Layer
    * ,-----------------------------------------------------------.
@@ -80,10 +83,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
    */
 [_FN] = KEYMAP_ANSI(
   LALT(LGUI(KC_ESC)),   KC_F1,    KC_F2,  KC_F3,  KC_F4,  KC_F5,  KC_F6,    KC_F7,    KC_F8,    KC_F9,    KC_F10,   KC_F11,   KC_F12, KC_DEL, \
-  KC_NO,    KC_NO,    KC_NO,  KC_NO,  KC_NO,  KC_NO,  KC_NO,    KC_NO,    KC_NO,    KC_NO,   KC_NO,    KC_NO,    KC_NO,  KC_NO,  \
-  KC_TRNS,  KC_NO,    KC_NO,  KC_NO,  KC_NO,  KC_NO,  KC_NO,  KC_NO,  KC_NO,  KC_NO, KC_VOLD,  KC_VOLU,          KC_TRNS,\
-  KC_TRNS,  KC_NO,    KC_NO,  KC_NO,  KC_NO,  KC_NO,  KC_NO,  KC_NO,    KC_NO,    KC_NO,    KC_NO,                      KC_TRNS,\
-  KC_TRNS,  KC_TRNS,  KC_TRNS,                     KC_TRNS,                         KC_TRNS,  KC_TRNS,KC_TRNS,            KC_TRNS),
+  __n__,    __n__,    __n__,  __n__,  __n__,  __n__,  __n__,    __n__,    __n__,    __n__,   __n__,    __n__,    __n__,  __n__,  \
+  _______,  __n__,    __n__,  __n__,  __n__,  __n__,  __n__,  __n__,  __n__,  __n__, KC_VOLD,  KC_VOLU,          _______,\
+  _______,  __n__,    __n__,  __n__,  __n__,  __n__,  __n__,  __n__,    __n__,    __n__,    __n__,                      _______,\
+  _______,  _______,  _______,                     _______,                         _______,  _______,_______,            _______),
 
   /* Keymap _MA: Macro Layer
    * ,-----------------------------------------------------------.
@@ -99,11 +102,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
    * `-----------------------------------------------------------'
    */
 [_MA] = KEYMAP_ANSI(
-  KC_NO,  KC_NO,  KC_NO,  KC_NO,  KC_NO,  KC_NO,  KC_NO,  KC_NO,  KC_NO,  KC_NO,  KC_NO,  KC_NO,  KC_NO,  KC_NO, \
-  KC_NO,  KC_NO,  KC_NO,  KC_NO,  KC_NO,  KC_NO,  KC_NO,  KC_NO,  KC_NO,  KC_NO,  KC_NO,  KC_NO,  KC_NO,  KC_NO, \
-  KC_NO,  KC_NO,  KC_NO,  KC_NO,  KC_NO,  KC_NO,  KC_NO,  KC_NO,  KC_NO,  KC_NO,  KC_NO,  KC_NO,          KC_NO,  \
-  KC_NO,  KC_NO,  KC_NO,  KC_NO,  KC_NO,  KC_NO,  KC_NO,  KC_NO,  KC_NO,  KC_NO,  KC_NO,                  KC_NO, \
-  KC_NO,  KC_NO,  KC_NO,                           KC_NO,                         KC_NO,  KC_NO,  KC_NO,  KC_TRNS),
+  __n__,  __n__,  __n__,  __n__,  __n__,  __n__,  __n__,  __n__,  __n__,  __n__,  __n__,  __n__,  __n__,  __n__, \
+  __n__,  __n__,  __n__,  __n__,  __n__,  __n__,  __n__,  __n__,  __n__,  __n__,  __n__,  __n__,  __n__,  __n__, \
+  __n__,  __n__,  __n__,  __n__,  __n__,  __n__,  __n__,  __n__,  __n__,  __n__,  __n__,  __n__,          __n__,  \
+  __n__,  __n__,  __n__,  __n__,  __n__,  __n__,  __n__,  __n__,  __n__,  __n__,  __n__,                  __n__, \
+  __n__,  __n__,  __n__,                           __n__,                         __n__,  __n__,  __n__,  _______),
 };
 
 enum function_id {
