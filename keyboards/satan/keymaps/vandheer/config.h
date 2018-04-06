@@ -55,7 +55,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #define RGBLIGHT_VAL_STEP 17
 
 /* Enable Backlight Breathing */
-// #define BACKLIGHT_BREATHING
+#define BACKLIGHT_BREATHING
+#define BREATHING_PERIOD 6
 
 /* COL2ROW or ROW2COL */
 #define DIODE_DIRECTION COL2ROW
