@@ -1,6 +1,6 @@
 #include "satan.h"
 
-// Used for SHIFT_ESC
+// Used for GRAVE_ON_ESC
 #define MODS_SHIFT_MASK (MOD_BIT(KC_LSHIFT)|MOD_BIT(KC_RSHIFT))
 
 // Each layer gets a name for readability, which is then used in the keymap matrix below.
@@ -32,7 +32,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
    * ,-----------------------------------------------------------.
    * |Esc~| 1|  2|  3|  4|  5|  6|  7|  8|  9|  0|  -|  =|Backsp |
    * |-----------------------------------------------------------|
-   * |Tab  |  Q|  W|  E|  R|  T|  Y|  U|  I|  O|  P|  [|  ]|  \  |
+   * |Tab~ |  Q|  W|  E|  R|  T|  Y|  U|  I|  O|  P|  [|  ]|  \  |
    * |-----------------------------------------------------------|
    * |Ctrl   |  A|  S|  D|  F|  G|  H|  J|  K|  L|  ;|  '|Return |
    * |-----------------------------------------------------------|
@@ -43,7 +43,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
    */
 [_BL] = KEYMAP_ANSI(
   F(0),    KC_1,    KC_2,    KC_3,   KC_4,    KC_5,    KC_6,    KC_7,     KC_8,    KC_9,   KC_0,    KC_MINS, KC_EQL,  KC_BSPC, \
-  KC_TAB,  KC_Q,    KC_W,    KC_E,   KC_R,    KC_T,    KC_Y,    KC_U,     KC_I,    KC_O,   KC_P,    KC_LBRC, KC_RBRC, KC_BSLS, \
+  F(1),  KC_Q,    KC_W,    KC_E,   KC_R,    KC_T,    KC_Y,    KC_U,     KC_I,    KC_O,   KC_P,    KC_LBRC, KC_RBRC, KC_BSLS, \
   MT(MOD_LCTL, KC_ESC), KC_A,    KC_S,    KC_D,   KC_F,    KC_G,    KC_H,    KC_J,     KC_K,    KC_L,   KC_SCLN, KC_QUOT,          KC_ENT,  \
   KC_LSPO, KC_Z,    KC_X,    KC_C,   KC_V,    KC_B,    KC_N,    KC_M,     KC_COMM, KC_DOT, KC_SLSH,                   KC_RSPC, \
   MO(_NA), KC_LALT, KC_LGUI,                           KC_SPC,                             KC_CAPS, KC_RALT, MO(_FN), MO(_MA)),
@@ -52,7 +52,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
    * ,-----------------------------------------------------------.
    * | ` |   |   |   |   |   |   |   |   |   |   |   |   |       |
    * |-----------------------------------------------------------|
-   * |     |   |   |   |   |   |Hom|PDo|PUp|End|   |   |   |     |
+   * | `   |   |   |   |   |   |Hom|PDo|PUp|End|   |   |   |     |
    * |-----------------------------------------------------------|
    * |Ctrl   |   |   |   |   |   |Lef|Dow|Up |Rig|   |   |       |
    * |-----------------------------------------------------------|
@@ -63,7 +63,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
    */
 [_NA] = KEYMAP_ANSI(
   KC_GRV,   __n__,    __n__,  __n__,  __n__,  __n__,  __n__,    __n__,    __n__,    __n__,    __n__,    __n__,  __n__,  __n__, \
-  __n__,    __n__,    __n__,  __n__,  __n__,  ITERM,  KC_HOME,  KC_PGUP,  KC_PGDN,  KC_END,   PMAN,     __n__,  __n__,  __n__,  \
+  KC_GRV,    __n__,    __n__,  __n__,  __n__,  ITERM,  KC_HOME,  KC_PGUP,  KC_PGDN,  KC_END,   PMAN,     __n__,  __n__,  __n__,  \
   _______,  __n__,    SLACK,  __n__,  __n__,  __n__,  KC_LEFT,  KC_DOWN,  KC_UP,    KC_RIGHT, __n__,    __n__,          _______,\
   _______,  __n__,    __n__,  CHROME, __n__,  __n__,  __n__,    MAIL,     __n__,    __n__,    __n__,                    _______,\
   _______,  _______,  _______,                     _______,                         _______,  _______,_______,          _______),
@@ -110,17 +110,19 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 };
 
 enum function_id {
-    SHIFT_ESC,
+    GRAVE_ON_ESC,
+    GRAVE_ON_TAB,
 };
 
 const uint16_t PROGMEM fn_actions[] = {
-  [0]  = ACTION_FUNCTION(SHIFT_ESC)
+  [0]  = ACTION_FUNCTION(GRAVE_ON_ESC),
+  [1]  = ACTION_FUNCTION(GRAVE_ON_TAB)
 };
 
 void action_function(keyrecord_t *record, uint8_t id, uint8_t opt) {
   static uint8_t shift_esc_shift_mask;
   switch (id) {
-    case SHIFT_ESC:
+    case GRAVE_ON_ESC:
       shift_esc_shift_mask = get_mods()&MODS_SHIFT_MASK;
       if (record->event.pressed) {
         if (shift_esc_shift_mask) {
@@ -136,6 +138,26 @@ void action_function(keyrecord_t *record, uint8_t id, uint8_t opt) {
           send_keyboard_report();
         } else {
           del_key(KC_ESC);
+          send_keyboard_report();
+        }
+      }
+      break;
+    case GRAVE_ON_TAB:
+      shift_esc_shift_mask = get_mods()&MODS_SHIFT_MASK;
+      if (record->event.pressed) {
+        if (shift_esc_shift_mask) {
+          add_key(KC_GRV);
+          send_keyboard_report();
+        } else {
+          add_key(KC_TAB);
+          send_keyboard_report();
+        }
+      } else {
+        if (shift_esc_shift_mask) {
+          del_key(KC_GRV);
+          send_keyboard_report();
+        } else {
+          del_key(KC_TAB);
           send_keyboard_report();
         }
       }
